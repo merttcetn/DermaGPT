@@ -8,6 +8,7 @@ from src.prompt import convert_quiz_to_text
 from src.llm import get_response_from_llm
 
 app = FastAPI()
+# http://127.0.0.1:8000/docs (swagger docs)
 
 class StartSessionRequest(BaseModel):
     photo_url: str

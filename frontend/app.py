@@ -14,7 +14,7 @@ if "chat_history" not in st.session_state:
 if not st.session_state["session_id"]:
     st.markdown("### 👇 Fill out the quiz and upload your face photo")
 
-    photo_url = st.text_input("📷 Enter your photo URL")
+    photo_url = st.text_input("📷 Enter your photo URL (optional)")
     age = st.slider("Age", 10, 80, 25)
 
     gender = st.selectbox("Gender", ["Male", "Female", "Other"])
@@ -72,7 +72,7 @@ if not st.session_state["session_id"]:
         }
 
         request_payload = {
-            "photo_url": photo_url,
+            "photo_url": photo_url if photo_url.strip() else None,
             "quiz_data": quiz_data
         }
 
