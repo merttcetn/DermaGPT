@@ -13,7 +13,7 @@ def get_wrinkle_acne_scores(photo_url: str, quiz_data: dict):
     payload = {
         "data": {
             "user_id": "test_user_123",
-            "Photo_url": photo_url,
+            "photo_url": photo_url,
             "quiz_data": quiz_data
         }
     }
