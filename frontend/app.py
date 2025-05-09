@@ -11,6 +11,8 @@ if "chat_history" not in st.session_state:
     st.session_state["chat_history"] = []
 if "quiz_submitted" not in st.session_state:
     st.session_state["quiz_submitted"] = False
+if "chat_input_value" not in st.session_state:
+    st.session_state["chat_input_value"] = ""
 
 # --- STEP 1: QUIZ FORM ---
 if not st.session_state["session_id"] and not st.session_state["quiz_submitted"]:
@@ -98,7 +100,7 @@ if st.session_state["session_id"]:
         st.markdown(f"🤖 **DermaGPT:** {msg['bot']}")
         st.markdown("---")
 
-    user_input = st.text_input("💬 Ask a question", key="chat_input")
+    user_input = st.text_input("💬 Ask a question", key="chat_input", value=st.session_state["chat_input_value"])
 
     if st.button("Send") and user_input.strip():
         try:
@@ -115,6 +117,8 @@ if st.session_state["session_id"]:
                 "user": user_input.strip(),
                 "bot": result["bot_response"]
             })
+
+            st.session_state["chat_input_value"] = ""  # input'u temizle
             st.rerun()
 
         except Exception as e:
