@@ -4,14 +4,16 @@ import requests
 st.set_page_config(page_title="DermaGPT", page_icon="🧴")
 st.title("🧴 DermaGPT – Personalized Skincare Advisor")
 
-# 🧠 Memory: chat geçmişini sakla
+# 🧠 Session State setup
 if "session_id" not in st.session_state:
     st.session_state["session_id"] = None
 if "chat_history" not in st.session_state:
     st.session_state["chat_history"] = []
+if "quiz_submitted" not in st.session_state:
+    st.session_state["quiz_submitted"] = False
 
 # --- STEP 1: QUIZ FORM ---
-if not st.session_state["session_id"]:
+if not st.session_state["session_id"] and not st.session_state["quiz_submitted"]:
     st.markdown("### 👇 Fill out the quiz and upload your face photo")
 
     photo_url = st.text_input("📷 Enter your photo URL (optional)")
@@ -56,7 +58,7 @@ if not st.session_state["session_id"]:
     daily_exercise_duration = st.slider("Daily Exercise Duration (minutes)", 0, 120, 30)
     daily_exercise_days_per_week = st.slider("Exercise Days Per Week", 0, 7, 3)
 
-    if st.button("💡 Get Initial Advice"):
+    if st.button("🚀 Start Chatting"):
         quiz_data = {
             "age": age,
             "gender": gender_value,
@@ -82,15 +84,10 @@ if not st.session_state["session_id"]:
             result = res.json()
 
             st.session_state["session_id"] = result["session_id"]
-            st.session_state["chat_history"].append({
-                "user": "Initial Quiz",
-                "bot": result["initial_response"]
-            })
-
-            st.success("✅ Skincare recommendation received!")
+            st.session_state["quiz_submitted"] = True
 
         except Exception as e:
-            st.error(f"❌ Failed to get initial advice: {e}")
+            st.error(f"❌ Failed to start session: {e}")
 
 # --- STEP 2: CHAT INTERFACE ---
 if st.session_state["session_id"]:
@@ -101,7 +98,7 @@ if st.session_state["session_id"]:
         st.markdown(f"🤖 **DermaGPT:** {msg['bot']}")
         st.markdown("---")
 
-    user_input = st.text_input("💬 Ask a follow-up question", key="chat_input")
+    user_input = st.text_input("💬 Ask a question", key="chat_input")
 
     if st.button("Send") and user_input.strip():
         try:
@@ -118,7 +115,14 @@ if st.session_state["session_id"]:
                 "user": user_input.strip(),
                 "bot": result["bot_response"]
             })
-            st.experimental_rerun()
+            st.rerun()
 
         except Exception as e:
             st.error(f"❌ Chat failed: {e}")
+
+# --- Optional: Reset session (dev use only) ---
+with st.sidebar:
+    if st.button("🔁 Reset Session"):
+        for key in list(st.session_state.keys()):
+            del st.session_state[key]
+        st.rerun()

@@ -9,6 +9,10 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 
 def get_response_from_llm(prompt: str, model="gpt-4o") -> str:
     try:
+        print("📤 Final Prompt to LLM:\n" + "-"*60)
+        print(prompt)
+        print("-"*60 + "\n")
+
         response = client.chat.completions.create(
             model=model,
             temperature=0.0,
