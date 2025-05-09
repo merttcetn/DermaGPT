@@ -79,11 +79,16 @@ if st.button("💡 Get Advice"):
         "quiz_data": quiz_data
     }
 
-    # --- Send request to backend ---
-    # res = requests.post("http://localhost:8000/get_advice", json=request_payload)
-    # st.json(res.json())
+    try:
+        res = requests.post("http://localhost:8000/start_session", json=request_payload)
+        res.raise_for_status()
+        result = res.json()
 
-    # For now, simulate response
-    st.success("✅ Quiz submitted! (Backend response will be shown here)")
-    st.subheader("📤 Sent Payload")
-    st.json(request_payload)
+        st.success("✅ Skincare recommendation received!")
+        st.subheader("🧾 AI Recommendation")
+        st.write(result["initial_response"])
+
+        st.session_state["session_id"] = result["session_id"]
+
+    except Exception as e:
+        st.error(f"❌ Failed to get response: {e}")
