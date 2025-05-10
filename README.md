@@ -19,6 +19,7 @@ DermaGPT uses a combination of technologies to analyze user information, facial 
 -   **📸 Facial Image Analysis**: Detect and score wrinkle and acne levels across 6 facial regions
 -   **💬 Interactive Chat Interface**: Ask questions about skincare concerns and get personalized recommendations
 -   **📚 Evidence-Based Advice**: Responses are grounded in dermatological knowledge and best practices
+-   **📊 Pinecone Integration**: Efficient vector storage and retrieval for skincare knowledge
 
 ## 📷 **Screenshots**
 
@@ -40,9 +41,29 @@ The system consists of several components:
 
 -   **⚙️ FastAPI Backend**: Handles requests, session management, and coordinates between components
 -   **👁️ Face Analysis API**: Processes uploaded images to extract skin condition metrics
--   **🗄️ Vector Database**: Stores and retrieves relevant skincare knowledge
+-   **🗄️ Vector Database (Pinecone)**: Stores and retrieves relevant skincare knowledge with efficient similarity search
 -   **🤖 LLM Integration**: Generates personalized responses using OpenAI's models
 -   **🖥️ Frontend Interface**: Provides a user-friendly way to interact with the system
+
+### 📊 **Pinecone Integration**
+
+DermaGPT leverages Pinecone as its vector database for several key benefits:
+
+-   **🔍 Semantic Search**: Enables finding relevant skincare information based on meaning rather than keywords
+-   **⚡ Low Latency Queries**: Fast retrieval of relevant information for real-time user interactions
+-   **📈 Scalability**: Easily handles growing knowledge bases without performance degradation
+-   **🎯 High Precision**: Finds the most relevant skincare information for each specific user query
+-   **🔄 Real-time Updates**: Knowledge base can be continuously updated without rebuilding indexes
+
+### 📋 **User Quiz System**
+
+The user questionnaire plays a crucial role in providing personalized recommendations:
+
+-   **💾 Data Collection**: Gathers essential information including age, skin type, concerns, and lifestyle factors
+-   **🧮 Profile Building**: Creates a comprehensive user profile for contextualizing recommendations
+-   **🎯 Goal Setting**: Defines specific skincare goals to guide the advice provided
+-   **🔄 Dynamic Adaptation**: Quiz responses inform the analysis and interpretation of facial analysis results
+-   **👥 Personalization**: Quiz data is vectorized and used to retrieve the most relevant skincare knowledge for each user
 
 ## 🔧 **Technical Details**
 
@@ -53,6 +74,7 @@ The project is built with:
 -   **🔮 OpenAI API**: For generating personalized responses
 -   **👀 Computer Vision APIs**: For facial analysis and feature detection
 -   **⚛️ React/Preact**: For the frontend user interface
+-   **🌐 Pinecone**: For vector storage and similarity search
 
 ## 👨‍💻 **Development**
 
@@ -74,6 +96,7 @@ The project pipeline was developed in the Jupyter notebook `notebooks/derma_pipe
 -   Node.js (for frontend)
 -   OpenAI API key
 -   Face Analysis API access
+-   Pinecone API key
 
 ### ⚙️ **Installation**
 
@@ -96,6 +119,8 @@ pip install -r requirements.txt
 # Create a .env file with your API keys
 OPENAI_API_KEY=your_openai_key
 FACE_ANALYSIS_API_URL=your_face_api_url
+PINECONE_API_KEY=your_pinecone_key
+PINECONE_ENVIRONMENT=your_pinecone_environment
 ```
 
 4. Run the backend server
@@ -129,3 +154,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 -   Dermatology resources and research papers
 -   OpenAI for LLM capabilities
 -   Face analysis API providers for skin condition analysis
+-   Pinecone for vector database capabilities
