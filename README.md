@@ -1,4 +1,4 @@
-# DermaGPT
+# **DermaGPT 🧠🧴**
 
 # <p align="center"><img src="favicon2.png" width="200" alt="DermaGPT Logo"></p>
 
