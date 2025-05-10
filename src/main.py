@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
 import uuid
@@ -10,6 +11,15 @@ from src.vectorstore import get_top_k_matches
 from src.llm import get_response_from_llm
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Geliştirme için tüm kaynaklara izin, production'da sınırla
+    allow_credentials=True,
+    allow_methods=["*"],  # Özellikle "OPTIONS", "POST"
+    allow_headers=["*"],
+)
+
 
 # --- Request / Response Schemas ---
 class StartSessionRequest(BaseModel):
