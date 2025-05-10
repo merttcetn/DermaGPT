@@ -1,4 +1,6 @@
-# DermaGPT <img src="screenshots/chat.png" width="30" alt="DermaGPT Logo">
+# DermaGPT <img src="favicon.png" width="30" alt="DermaGPT Logo">
+
+![DermaGPT Logo](favicon.png)
 
 DermaGPT is an AI-powered personalized skincare advisor that combines computer vision facial analysis with Large Language Models to provide tailored skincare recommendations. This project initially started as a case study but has been extensively customized and expanded to create a comprehensive skincare advisory system.
 
