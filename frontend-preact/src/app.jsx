@@ -253,24 +253,35 @@ export default function App() {
         <div className="h-[90vh] flex flex-col bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900 text-white p-3 overflow-hidden">
             <div className="max-w-6xl mx-auto w-full h-full flex flex-col justify-center">
                 <div className="text-center mb-6">
-                    <div className="inline-block bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-500 p-4 rounded-2xl mb-3 animate-pulse-slow shadow-2xl shadow-pink-500/20">
-                        <span className="text-3xl">🧴</span>
+                    <div className="inline-block bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-500 rounded-2xl mb-3 shadow-2xl shadow-pink-500/20 w-full max-w-lg mx-auto py-3">
+                        <div className="flex items-center justify-center gap-3">
+                            <img
+                                src="/favicon.png"
+                                alt="DermaGPT Logo"
+                                className="w-12 h-12 object-contain rounded-xl"
+                            />
+                            <div className="text-left">
+                                <h1 className="text-3xl font-extrabold">
+                                    <span className="text-black drop-shadow-[0_1px_1px_rgba(255,255,255,0.1)] hover:text-fuchsia-500 transition-all duration-300">
+                                        DermaGPT
+                                    </span>
+                                </h1>
+                                <p className="text-sm font-light italic text-zinc-300 bg-gradient-to-r from-purple-300 to-indigo-400 bg-clip-text text-transparent">
+                                    Your Personal Skincare Assistant
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <h1 className="text-4xl font-extrabold mb-1">
-                        <span className="bg-gradient-to-r from-pink-400 to-purple-500 bg-clip-text text-transparent">
-                            DermaGPT
-                        </span>
-                    </h1>
-                    <p className="text-lg font-light italic text-zinc-300 bg-gradient-to-r from-purple-300 to-indigo-400 bg-clip-text text-transparent">
-                        Your Personal Skincare Assistant
-                    </p>
                 </div>
 
                 {!sessionId ? (
                     <div className="flex-1 flex flex-col overflow-hidden">
                         <div className="overflow-y-auto flex-1 pr-1 scrollbar-thin scrollbar-thumb-pink-500/30 scrollbar-track-zinc-800/30">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-4">
-                                <FormCard icon="📷" title="Skin Analysis">
+                                <FormCard
+                                    icon="📷"
+                                    title="Your Photo URL (optional)"
+                                >
                                     <div className="relative">
                                         <input
                                             type="text"
@@ -286,7 +297,7 @@ export default function App() {
                                     </div>
                                 </FormCard>
 
-                                <FormCard icon="🎂" title="Age">
+                                <FormCard icon="🎂" title="How old are you?">
                                     <div className="relative">
                                         <input
                                             type="number"
@@ -303,7 +314,10 @@ export default function App() {
                                     </div>
                                 </FormCard>
 
-                                <FormCard icon="⚧️" title="Gender">
+                                <FormCard
+                                    icon="⚧️"
+                                    title="What is your gender?"
+                                >
                                     {renderOptionPills(
                                         options.gender,
                                         formData.gender,
@@ -316,7 +330,7 @@ export default function App() {
                                     )}
                                 </FormCard>
 
-                                <FormCard icon="💉" title="Has Botox">
+                                <FormCard icon="💉" title="Have you had Botox?">
                                     {renderOptionPills(
                                         options.botox,
                                         formData.has_botox,
@@ -329,7 +343,10 @@ export default function App() {
                                     )}
                                 </FormCard>
 
-                                <FormCard icon="🧬" title="Skin Type">
+                                <FormCard
+                                    icon="🧬"
+                                    title="What is your skin type?"
+                                >
                                     {renderOptionPills(
                                         options.skinType,
                                         formData.skin_type,
@@ -342,14 +359,20 @@ export default function App() {
                                     )}
                                 </FormCard>
 
-                                <FormCard icon="💡" title="Main Goals">
+                                <FormCard
+                                    icon="💡"
+                                    title="What are your main goals?"
+                                >
                                     {renderMultiSelectPills(
                                         options.mainGoals,
                                         "main_goals"
                                     )}
                                 </FormCard>
 
-                                <FormCard icon="💧" title="Daily Water Intake">
+                                <FormCard
+                                    icon="💧"
+                                    title="How much water do you drink daily?"
+                                >
                                     <div className="flex items-center gap-4">
                                         <input
                                             type="range"
@@ -372,7 +395,10 @@ export default function App() {
                                     </div>
                                 </FormCard>
 
-                                <FormCard icon="🛏️" title="Sleep Duration">
+                                <FormCard
+                                    icon="🛏️"
+                                    title="How many hours do you sleep?"
+                                >
                                     <div className="flex items-center gap-4">
                                         <input
                                             type="range"
@@ -395,7 +421,10 @@ export default function App() {
                                     </div>
                                 </FormCard>
 
-                                <FormCard icon="📍" title="Focused Face Areas">
+                                <FormCard
+                                    icon="📍"
+                                    title="What are your focused face areas?"
+                                >
                                     <div className="overflow-x-auto">
                                         {renderMultiSelectPills(
                                             options.faceAreas,
@@ -404,7 +433,10 @@ export default function App() {
                                     </div>
                                 </FormCard>
 
-                                <FormCard icon="⚠️" title="Skin Sensitivities">
+                                <FormCard
+                                    icon="⚠️"
+                                    title="Do you have any skin sensitivities?"
+                                >
                                     <div className="overflow-x-auto">
                                         {renderMultiSelectPills(
                                             options.sensitivities,
@@ -413,7 +445,10 @@ export default function App() {
                                     </div>
                                 </FormCard>
 
-                                <FormCard icon="🏃" title="Exercise Duration">
+                                <FormCard
+                                    icon="🏃"
+                                    title="How much time do you spend exercising?"
+                                >
                                     <div className="flex items-center gap-4">
                                         <input
                                             type="range"
@@ -440,7 +475,10 @@ export default function App() {
                                     </div>
                                 </FormCard>
 
-                                <FormCard icon="📅" title="Exercise Days">
+                                <FormCard
+                                    icon="📅"
+                                    title="How many days do you exercise per week?"
+                                >
                                     <div className="flex items-center gap-4">
                                         <input
                                             type="range"
@@ -499,7 +537,7 @@ export default function App() {
                                         Processing...
                                     </>
                                 ) : (
-                                    <>✨ Transform Your Skincare Routine</>
+                                    <>Start Chatting! 💬</>
                                 )}
                             </button>
                         </div>
@@ -509,17 +547,26 @@ export default function App() {
                         <div className="flex-1 bg-gradient-to-br from-zinc-900/95 to-zinc-800/95 backdrop-blur-md p-4 rounded-2xl shadow-inner border border-zinc-700/50 overflow-y-auto scrollbar-thin scrollbar-thumb-pink-500/30 scrollbar-track-zinc-800/30">
                             {chatHistory.length === 0 ? (
                                 <div className="h-full flex flex-col justify-center items-center py-8 px-4">
-                                    <div className="inline-block bg-gradient-to-br from-pink-400/20 via-purple-500/20 to-indigo-500/20 p-5 rounded-full mb-5 animate-pulse-slow">
-                                        <span className="text-4xl">💬</span>
+                                    <div className="bg-gradient-to-br from-pink-400/20 via-purple-500/20 to-indigo-500/20 p-4 rounded-xl mb-5 max-w-md w-full mx-auto">
+                                        <div className="flex items-center gap-3">
+                                            <img
+                                                src="/favicon.png"
+                                                alt="DermaGPT Logo"
+                                                className="w-10 h-10 object-contain rounded-lg"
+                                            />
+                                            <div>
+                                                <h3 className="text-xl font-semibold text-white">
+                                                    Your Personal Consultation
+                                                </h3>
+                                                <p className="text-zinc-400 text-sm">
+                                                    Based on your skincare
+                                                    profile, I'm ready to
+                                                    provide personalized
+                                                    recommendations.
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <h3 className="text-xl font-semibold text-white mb-2">
-                                        Your Personal Consultation
-                                    </h3>
-                                    <p className="text-zinc-400 text-center max-w-xl">
-                                        Based on your skincare profile, I'm
-                                        ready to provide personalized
-                                        recommendations.
-                                    </p>
                                     <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-3 max-w-2xl mx-auto w-full">
                                         <button
                                             onClick={() => {
@@ -598,10 +645,12 @@ export default function App() {
                                             {/* Bot mesajı - ChatGPT gibi düzenle */}
                                             <div className="mb-6">
                                                 <div className="flex items-center mb-1.5">
-                                                    <div className="shrink-0 h-8 w-8 bg-purple-500/20 flex items-center justify-center rounded-full shadow-md mr-2">
-                                                        <span className="text-purple-400">
-                                                            🤖
-                                                        </span>
+                                                    <div className="shrink-0 h-8 w-8 bg-purple-500/20 flex items-center justify-center rounded-full shadow-md mr-2 overflow-hidden">
+                                                        <img
+                                                            src="/favicon.png"
+                                                            alt="DermaGPT"
+                                                            className="w-6 h-6 object-contain"
+                                                        />
                                                     </div>
                                                     <div className="text-sm font-medium text-zinc-400">
                                                         DermaGPT
