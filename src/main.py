@@ -20,7 +20,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 # --- Request / Response Schemas ---
 class StartSessionRequest(BaseModel):
     photo_url: Optional[str] = None
@@ -43,21 +42,23 @@ def start_session(request: StartSessionRequest):
     photo_url = request.photo_url
     quiz_data = request.quiz_data
 
-    if photo_url:
+    if photo_url: # photo url is optional
         try:
             wrinkle_data, acne_data, wrinkle_score, acne_score = get_wrinkle_acne_scores(photo_url, quiz_data)
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Face analysis failed: {str(e)}")
-    else:
+    else: # if no photo url is provided, set all face analysis data to None
         wrinkle_data, acne_data, wrinkle_score, acne_score = [], [], None, None
 
+    # convert quiz data to text
     quiz_summary = convert_quiz_to_text(quiz_data, wrinkle_data, acne_data, wrinkle_score, acne_score)
 
+    # store session data
     chat_sessions[session_id] = {
         "photo_url": photo_url,
         "quiz_data": quiz_data,
         "quiz_summary": quiz_summary,
-        "history": []  # Başlangıçta boş olacak
+        "history": []  # empty at first
     }
 
     return StartSessionResponse(session_id=session_id)
@@ -68,6 +69,7 @@ def chat(request: ChatRequest):
     session_id = request.session_id
     user_msg = request.user_message
 
+    # check if session exists
     if session_id not in chat_sessions:
         raise HTTPException(status_code=404, detail="Session not found.")
 
