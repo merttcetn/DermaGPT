@@ -20,6 +20,7 @@ DermaGPT uses a combination of technologies to analyze user information, facial 
 -   **💬 Interactive Chat Interface**: Ask questions about skincare concerns and get personalized recommendations
 -   **📚 Evidence-Based Advice**: Responses are grounded in dermatological knowledge and best practices
 -   **📊 Pinecone Integration**: Efficient vector storage and retrieval for skincare knowledge
+-   **🔍 Prompt Transparency**: Access to the full LLM prompts from the console for debugging and understanding response generation, including retrieved QA pairs from Pinecone
 
 ## 📷 **Screenshots**
 
@@ -34,6 +35,10 @@ DermaGPT uses a combination of technologies to analyze user information, facial 
 ### 💭 Chat Interface
 
 ![Chat Interface](screenshots/chat.png)
+
+### 📋 Full Prompt Display in the console
+
+![Full Prompt](screenshots/full_prompt.png)
 
 ## 🏗️ **Architecture**
 
@@ -64,6 +69,15 @@ The user questionnaire plays a crucial role in providing personalized recommenda
 -   **🎯 Goal Setting**: Defines specific skincare goals to guide the advice provided
 -   **🔄 Dynamic Adaptation**: Quiz responses inform the analysis and interpretation of facial analysis results
 -   **👥 Personalization**: Quiz data is vectorized and used to retrieve the most relevant skincare knowledge for each user
+
+### 🔍 **Prompt Transparency**
+
+DermaGPT offers full transparency into the AI decision-making process:
+
+-   **📋 Full Prompt Access**: View the complete prompts sent to the LLM, including user context, retrieved knowledge, and instructions
+-   **🔧 Debugging Aid**: Helpful for developers to understand how responses are generated and fine-tune the system
+-   **📊 Query Analysis**: Examine how user queries are processed and which information is retrieved
+-   **🔬 Educational Tool**: Learn about the prompt engineering techniques used in the system
 
 ## 🔧 **Technical Details**
 

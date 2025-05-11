@@ -165,9 +165,11 @@ export default function App() {
             });
 
             const data = await res.json();
+            console.log("📝 Full LLM Prompt:", data.full_prompt);
             setChatHistory((prev) => {
                 const copy = [...prev];
                 copy[copy.length - 1].bot = data.bot_response;
+                copy[copy.length - 1].fullPrompt = data.full_prompt;
                 return copy;
             });
             setInput("");
@@ -621,7 +623,6 @@ export default function App() {
                                 <div className="space-y-6 px-1">
                                     {chatHistory.map((chat, i) => (
                                         <div key={i} className="animate-fadeIn">
-                                            {/* Kullanıcı mesajı - ChatGPT benzeri düzenleme */}
                                             <div className="mb-6">
                                                 <div className="flex items-center mb-1.5">
                                                     <div className="shrink-0 h-8 w-8 bg-pink-500/20 flex items-center justify-center rounded-full shadow-md mr-2">
@@ -642,7 +643,6 @@ export default function App() {
                                                 </div>
                                             </div>
 
-                                            {/* Bot mesajı - ChatGPT gibi düzenle */}
                                             <div className="mb-6">
                                                 <div className="flex items-center mb-1.5">
                                                     <div className="shrink-0 h-8 w-8 bg-purple-500/20 flex items-center justify-center rounded-full shadow-md mr-2 overflow-hidden">

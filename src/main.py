@@ -34,7 +34,8 @@ class ChatRequest(BaseModel):
 
 class ChatResponse(BaseModel):
     bot_response: str
-
+    full_prompt: str
+    
 # --- Start Session (quiz only, no LLM) ---
 @app.post("/start_session", response_model=StartSessionResponse)
 def start_session(request: StartSessionRequest):
@@ -93,14 +94,15 @@ def chat(request: ChatRequest):
 
     # --- LLM Call ---
     try:
-        response = get_response_from_llm(prompt)
+        response, full_prompt = get_response_from_llm(prompt)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"LLM generation failed: {str(e)}")
 
     # --- Update History ---
     history.append({
         "user": user_msg,
-        "bot": response
+        "bot": response,
+        "full_prompt": full_prompt
     })
 
-    return ChatResponse(bot_response=response)
+    return ChatResponse(bot_response=response, full_prompt=full_prompt)

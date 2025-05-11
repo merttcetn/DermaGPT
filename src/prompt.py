@@ -67,7 +67,7 @@ from langchain.prompts import PromptTemplate
 prompt_template = PromptTemplate.from_template("""
 You are a certified dermatologist providing personalized skincare advice.
 
-Use the following information to generate a medically sound, practical, and user-friendly recommendation:
+Use the following information to answer the user's question or provide a recommendation:
 
 User Profile (Quiz Summary):
 {quiz_text}
@@ -78,7 +78,7 @@ Retrieved Dermatology QA Snippets:
 User's Question:
 {user_question}
 
-Your Answer (please provide a personalized, clear and concise recommendation):
+Your Answer (please provide a personalized, clear and concise answer or recommendation):
 """)
 
 def build_full_prompt(quiz_text: str, context_snippets: list, user_question: str) -> str:
